@@ -1,0 +1,53 @@
+{
+  "serapistList": {
+    "title": "セラピスト一覧"
+  },
+  "shopList": {
+    "title": "店舗一覧"
+  },
+  "common": {
+    "readMore": "もっと見る"
+  },
+  "area": {
+    "hokkaido": "北海道",
+    "tohoku": "東北",
+    "kanto": "関東",
+    "chubu": "中部",
+    "kansai": "関西",
+    "chugoku-shikoku": "中国・四国",
+    "kyusyu-okinawa": "九州・沖縄"
+  },
+  "areaSearch": {
+    "searchByArea": "エリアで検索",
+    "selectArea": "エリアを選択"
+  },
+  "areaSerapistList": {
+    "title": "{area}のセラピスト・店舗一覧",
+    "serapistList": "セラピスト一覧"
+  },
+  "enhanced-menu": {
+    "myPage": "マイページ",
+    "logout": "ログアウト",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "login": "ログイン"
+  },
+  "login": {
+    "title": "ユーザー登録&ログイン"
+  },
+  "comment-card": {
+    "lock": "セラピストに直接送られたメッセージです"
+  },
+  "serapister-view": {
+    "description": "セラピストに聞いてみたいこと、口コミ、願望、ファンメッセージ、etc… 直接メッセージを送るのはまだ勇気が出ない人もここに自由に投稿してみよう。もしかしたら気づいてくれるかも。",
+    "post-comment-button-text": "口コミ・ファンメ投稿",
+    "comment-list-text": "ファンメッセージ・口コミ",
+    "empty-comment": "まだメッセージはありません"
+  },
+  "components": {
+    "banner": {
+      "text": "TikTokで推しの\nセラピストを見つけよう",
+      "site": "女風コミュニティ No1 サイト"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "serapistList": {
+    "title": "治疗师名单"
+  },
+  "shopList": {
+    "title": "商店名单"
+  },
+  "common": {
+    "readMore": "查看更多"
+  },
+  "area": {
+    "hokkaido": "北海道",
+    "tohoku": "东北",
+    "kanto": "关东",
+    "chubu": "中心",
+    "kansai": "关西",
+    "chugoku-shikoku": "中国和四国",
+    "kyusyu-okinawa": "九州/冲绳"
+  },
+  "areaSearch": {
+    "searchByArea": "地区搜索",
+    "selectArea": "选择地区"
+  },
+  "areaSerapistList": {
+    "title": "{area}的治疗师和商店一览表",
+    "serapistList": "治疗师名单"
+  },
+  "enhanced-menu": {
+    "myPage": "我的页面",
+    "logout": "注销",
+    "privacy": "隐私政策。",
+    "terms": "条款和条件",
+    "login": "登录"
+  },
+  "login": {
+    "title": "用户注册和登录"
+  },
+  "comment-card": {
+    "lock": "直接发送给治疗师的信息。"
+  },
+  "serapister-view": {
+    "description": "询问你的治疗师，写评论、祝福、粉丝留言等等......如果你觉得还没有足够的勇气直接发送信息，可以在这里随意发布。 也许他们会注意到你。",
+    "post-comment-button-text": "口碑和粉丝留言",
+    "comment-list-text": "粉丝留言和评论",
+    "empty-comment": "还没有留言。"
+  },
+  "components": {
+    "banner": {
+      "text": "TikTok 猜猜看\n寻找治疗师",
+      "site": "女性时尚社区第一网站"
+    }
+  }
+}
