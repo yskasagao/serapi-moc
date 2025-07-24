@@ -4,7 +4,11 @@ import Logo from './assets/logo.png'
 import { AreaSearchModal } from '@/components/header/_components/area-search-modal'
 import Link from 'next/link'
 
-export const Header = () => {
+type Props = {
+  showAreaSearch?: boolean
+}
+
+export const Header = ({ showAreaSearch = true }: Props) => {
   return (
     <header className='sticky left-0 right-0 top-0 z-50 h-16 bg-white shadow-md'>
       <div className='container mx-auto flex h-full max-w-[980px] items-center justify-between px-4'>
@@ -14,7 +18,7 @@ export const Header = () => {
           </Link>
         </div>
         <div className='flex items-center space-x-4'>
-          <AreaSearchModal />
+          {showAreaSearch && <AreaSearchModal />}
           <EnhancedMenu />
         </div>
       </div>

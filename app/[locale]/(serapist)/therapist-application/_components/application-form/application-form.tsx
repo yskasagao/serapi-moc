@@ -84,7 +84,7 @@ export const ApplicationForm = (props: Props) => {
     })
   }
   return (
-    <div className='min-h-screen bg-gradient-to-r from-[#e6f3ff] to-[#fff0f5] px-4 py-12 sm:px-6 lg:px-8'>
+    <div className='px-4 pt-12 pb-20 sm:px-6 lg:px-8'>
       <Toaster />
       <Card className='mx-auto max-w-2xl overflow-hidden shadow-lg'>
         <div className='relative h-[200px] w-full overflow-hidden bg-gradient-to-r from-[#e6f3ff] to-[#f0f8ff]'>
@@ -116,7 +116,7 @@ export const ApplicationForm = (props: Props) => {
           </div>
           <div className='absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#808080] via-[#a0a0a0] to-[#c0c0c0]' />
         </div>
-        <CardContent className='p-6'>
+        <CardContent className='p-8'>
           <form action={formAction} className='space-y-6'>
             <div className='space-y-2'>
               <Label htmlFor='nickname' className='text-[#4a4a4a]'>
@@ -199,7 +199,7 @@ export const ApplicationForm = (props: Props) => {
               </div>
             </div>
 
-            <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+            <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
               <div className='space-y-2'>
                 <Label htmlFor='age' className='text-[#4a4a4a]'>
                   年齢
@@ -209,6 +209,8 @@ export const ApplicationForm = (props: Props) => {
                   type='number'
                   className='w-full border-[#e6e6e6] focus:border-[#ff7e8a] focus:ring-[#ff7e8a]'
                 />
+              </div>
+              <div className='space-y-2'>
                 <Label htmlFor='height' className='text-[#4a4a4a]'>
                   身長 (cm)
                 </Label>
@@ -229,7 +231,7 @@ export const ApplicationForm = (props: Props) => {
                 />
               </div>
             </div>
-            <div className='mt-6 flex justify-center'>
+            <div className='mt-10 flex justify-center pt-4 pb-2'>
               <Button
                 disabled={!isValid || isPending}
                 className='w-full bg-[#4a4a4a] px-6 py-3 text-lg text-white transition-colors hover:bg-[#666666] sm:w-auto sm:min-w-[200px]'
