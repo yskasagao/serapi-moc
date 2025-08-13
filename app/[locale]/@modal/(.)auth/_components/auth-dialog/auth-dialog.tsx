@@ -6,9 +6,9 @@ type Props = {
   children?: React.ReactNode
 }
 
-export const TermsDialog = ({ children }: Props) => {
+export const AuthDialog = ({ children }: Props) => {
   return (
-    <Modal title="利用規約" size="large">
+    <Modal title="ログイン・新規登録" size="large">
       {children}
     </Modal>
   )

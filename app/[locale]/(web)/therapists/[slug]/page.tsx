@@ -8,10 +8,20 @@ import { type SerapistarDetail } from './_components/serapister-view/type'
 import { getAuthOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { APP_NAME, ORIGIN } from '@/lib/constants'
+import { getMockSerapistBySlug } from '@/lib/mock-serapist-data'
+
 type Props = {
   params: Promise<{ slug: string }>
 }
-const fetchSerapistar = cache((slug: string): Promise<SerapistarDetail> => {
+
+const fetchSerapistar = cache(async (slug: string): Promise<SerapistarDetail> => {
+  // 開発環境でモックデータを使用する場合
+  const mockData = getMockSerapistBySlug(slug)
+  if (mockData) {
+    return mockData
+  }
+
+  // 本番環境: データベースからデータを取得
   return prisma.serapistar.findFirstOrThrow({
     select: {
       id: true,
@@ -73,17 +83,27 @@ export default async function Page(props: Props) {
   try {
     const params = await props.params
     const serapister = await fetchSerapistar(params.slug)
-    const session = await getServerSession(getAuthOptions())
+    
+    // 開発環境でモックデータを使用している場合はブックマークはサンプル状態
     let isBookmarked = false
-    if (session) {
-      const bookmark = await prisma.bookmark.findFirst({
-        where: {
-          serapistarId: serapister.id,
-          userId: session.user.id,
-        },
-      })
-      isBookmarked = bookmark !== null
+    const mockData = getMockSerapistBySlug(params.slug)
+    if (mockData) {
+      // モックデータの場合はサンプル状態を返す
+      isBookmarked = false // または true でサンプル状態
+    } else {
+      // 本番環境: 実際のブックマーク状態をチェック
+      const session = await getServerSession(getAuthOptions())
+      if (session) {
+        const bookmark = await prisma.bookmark.findFirst({
+          where: {
+            serapistarId: serapister.id,
+            userId: session.user.id,
+          },
+        })
+        isBookmarked = bookmark !== null
+      }
     }
+    
     const flushMessage = (await cookies()).get('flush')
 
     return (

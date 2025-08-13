@@ -1,9 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { Plus } from 'lucide-react'
 import FVImage from './assets/media_ex_fv.jpeg'
-import Link from 'next/link'
+import { WriteDiaryButton } from '../write-diary-button'
 
 export const HeroBanner = () => {
   return (
@@ -62,14 +61,8 @@ export const HeroBanner = () => {
               あなたも体験を共有して、みんなの参考になる情報を提供しませんか？
             </p>
 
-            {/* 日記作成ページへのリンク - 別のアプローチ */}
-            <Link
-              href='/experience-diary/create'
-              className='inline-flex transform items-center justify-center rounded-full bg-[#ff7e8a] px-5 py-2 text-base text-white shadow-md transition-all duration-200 hover:-translate-y-1 hover:bg-[#ff6b7a] hover:shadow-lg md:px-6 md:py-3 md:text-lg'
-            >
-              <Plus className='mr-1 h-4 w-4 md:mr-2 md:h-5 md:w-5' />
-              体験日記を書く
-            </Link>
+            {/* 日記作成ボタン - 認証状態による分岐 */}
+            <WriteDiaryButton />
           </div>
         </div>
       </div>

@@ -1,10 +1,9 @@
 import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
 import type { User } from 'next-auth'
-import { getAuthOptions } from './auth'
+import { getSessionWithDevBypass } from './get-session-with-dev-bypass'
 
 export const getUserOrRedirect = async (): Promise<User> => {
-  const session = await getServerSession(getAuthOptions())
+  const session = await getSessionWithDevBypass()
   if (!session?.user) {
     redirect('/login')
   }
