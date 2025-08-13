@@ -318,11 +318,11 @@ const AgeVerificationCard = ({ onVerify }: { onVerify: (verified: boolean) => vo
           transition={{ duration: 0.5 }}
         >
           <h2 className='mb-2 flex items-center justify-center text-base font-normal text-[#4a4a4a]'>
-            <AlertTriangle className='mr-2 h-4 w-4 text-[#ff7e8a]' />
+            <AlertTriangle className='mr-2 h-4 w-4 text-brand-icon-static' />
             18歳未満閲覧禁止
           </h2>
           <motion.div
-            className='mx-auto mb-6 h-px bg-[#ff7e8a]'
+            className='mx-auto mb-6 h-px bg-brand-ui-static'
             initial={{ width: 0 }}
             animate={{ width: animationStep >= 1 ? '4rem' : 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -376,11 +376,11 @@ const VerificationButton = ({
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className='group relative min-w-[120px] overflow-hidden rounded-md bg-[#ff7e8a] px-8 py-2 font-normal text-white shadow-sm transition-all duration-300'
+      className='group relative min-w-[120px] overflow-hidden rounded-md bg-brand-ui px-8 py-2 font-normal text-white shadow-sm transition-all duration-300'
     >
       <span className='relative z-10'>{label}</span>
       <motion.div
-        className='absolute inset-0 bg-gradient-to-r from-[#ff7e8a] to-[#ff9eb8]'
+        className='absolute inset-0 bg-gradient-to-r from-brand-ui to-brand-light'
         initial={{ x: '-100%' }}
         whileHover={{ x: 0 }}
         transition={{ duration: 0.4 }}

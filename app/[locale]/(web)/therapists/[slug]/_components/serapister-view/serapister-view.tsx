@@ -116,7 +116,7 @@ export const SerapisterView = ({ serapistar, message, isBookmarked }: Props) => 
                     localStorage.setItem(key, JSON.stringify(params))
                     toast.success('Starを送信しました')
                   }}
-                  className='flex cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-[rgb(254,44,85)] focus:outline-none'
+                  className='flex cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-brand-icon focus:outline-none'
                 >
                   <Star className='h-8 w-8 fill-current' />
                   <span className='text-2xl'>+{calcTotalStar(serapistar)}</span>
@@ -129,12 +129,12 @@ export const SerapisterView = ({ serapistar, message, isBookmarked }: Props) => 
             {/* Message Button */}
             <Button
               size='lg'
-              className='mb-8 w-full border-2 border-[#ff4b5c] bg-white font-bold font-medium text-[#ff4b5c] hover:bg-[#fff0f3]'
+              className='mb-8 w-full border-2 border-brand-ui bg-white font-bold font-medium text-brand-ui hover:bg-gray-50'
               onClick={() => {
                 router.push(`/therapists/${serapistar.slug}/post-comment`)
               }}
             >
-              <Mail className='mr-2 h-5 w-5 text-[#ff4b5c]' />
+              <Mail className='mr-2 h-5 w-5 text-brand-ui' />
               {t('post-comment-button-text')}
             </Button>
             <p className='mb-8 max-w-2xl text-center text-sm text-gray-600'>{t('description')}</p>

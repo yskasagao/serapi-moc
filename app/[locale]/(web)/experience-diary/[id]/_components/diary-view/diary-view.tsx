@@ -75,7 +75,7 @@ export const DiaryView = (props: Props) => {
       <div className='mb-4'>
         <Link
           href='/experience-diary'
-          className='group inline-flex items-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-[#ff7e8a] shadow-sm transition-all duration-200 hover:border-[#ff7e8a] hover:bg-gray-50'
+          className='group inline-flex items-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-brand-ui shadow-sm transition-all duration-200 hover:border-brand-ui hover:bg-gray-50'
         >
           <ArrowLeft className='mr-2 h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5' />
           <span className='tracking-wide'>一覧に戻る</span>
@@ -93,14 +93,14 @@ export const DiaryView = (props: Props) => {
             </span>
             <div className='flex items-center space-x-1'>
               <Heart
-                className={`h-5 w-5 ${isLiked ? 'fill-[#ff7e8a] text-[#ff7e8a]' : 'text-gray-400'}`}
+                className={`h-5 w-5 ${isLiked ? 'fill-brand-icon-static text-brand-icon-static' : 'text-gray-400'}`}
               />
               <span className='text-sm text-gray-500'>{props.diary.like}</span>
             </div>
           </div>
 
           {/* 著者情報 */}
-          <div className='mb-6 rounded-r-md border-l-4 border-[#ff7e8a] bg-gray-50 py-2 pl-4 italic text-gray-600'>
+          <div className='mb-6 rounded-r-md border-l-4 border-brand-ui-static bg-gray-50 py-2 pl-4 italic text-gray-600'>
             {props.diary.User.name}
           </div>
 
@@ -136,10 +136,10 @@ export const DiaryView = (props: Props) => {
               onClick={handleLike}
               variant='outline'
               className={`flex items-center gap-2 ${
-                isLiked ? 'border-[#ff7e8a] text-[#ff7e8a]' : ''
+                isLiked ? 'border-brand-ui-static text-brand-ui-static' : ''
               }`}
             >
-              <Heart className={`h-4 w-4 ${isLiked ? 'fill-[#ff7e8a] text-[#ff7e8a]' : ''}`} />
+              <Heart className={`h-4 w-4 ${isLiked ? 'fill-brand-icon-static text-brand-icon-static' : ''}`} />
               {isLiked ? 'いいね済み' : 'いいね'}
             </Button>
             <Button onClick={handleShare} variant='outline' className='flex items-center gap-2'>

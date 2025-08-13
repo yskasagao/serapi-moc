@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import { usePathname } from '@/i18n/routing'
 import dayjs from '@/lib/dayjs'
 import { incrementStar } from '@/lib/server-only/serapist/increment-star'
-import { type Serapist } from '@/lib/server-only/serapist/schema'
+import { type Serapist } from '@/app/api/serapist/schema'
 
 const key = 'star-params'
 type StarParam = {
@@ -32,12 +32,27 @@ export const SerapistCard = (props: Props) => {
       props.serapist.parameter.service
     : 0
   const pathname = usePathname()
+  
+  // ライブ配信中の場合の特別なスタイリング
+  const isLive = props.serapist.isLive === true
+  const cardClasses = isLive
+    ? 'flex aspect-[228/454] w-full min-w-[163px] max-w-[228px] flex-col overflow-hidden rounded-lg bg-white shadow-lg ring-2 ring-red-200 ring-opacity-60'
+    : 'flex aspect-[228/454] w-full min-w-[163px] max-w-[228px] flex-col overflow-hidden rounded-lg bg-white shadow-md'
+  
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
-      className='flex aspect-[228/454] w-full min-w-[163px] max-w-[228px] flex-col overflow-hidden rounded-lg bg-white shadow-md'
+      className={cardClasses}
     >
       <div className='relative flex flex-grow items-center justify-center bg-gray-100'>
+        {/* ライブ配信中インジケーター */}
+        {isLive && (
+          <div className='absolute top-2 left-2 z-10 flex items-center space-x-1 rounded-full bg-red-500 px-2 py-1 text-xs font-medium text-white shadow-md'>
+            <div className='h-1.5 w-1.5 animate-pulse rounded-full bg-white'></div>
+            <span>LIVE</span>
+          </div>
+        )}
+        
         <div className='aspect-square w-[88%] overflow-hidden rounded-full'>
           <Image
             src={props.serapist.avatar ?? '/noimage.jpg'}
@@ -49,7 +64,7 @@ export const SerapistCard = (props: Props) => {
         </div>
       </div>
       <button
-        className='flex items-center justify-end p-2'
+        className='group flex items-center justify-end p-2 text-brand-icon transition-colors hover:text-brand-icon-hover'
         onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
           e.stopPropagation()
           e.preventDefault()
@@ -79,7 +94,7 @@ export const SerapistCard = (props: Props) => {
           toast.success('Starを送信しました')
         }}
       >
-        <span className='mr-1 text-sm' style={{ color: 'rgb(254, 44, 85)' }}>
+        <span className='mr-1 text-sm'>
           +{totalStar}
         </span>
         <svg
@@ -88,10 +103,11 @@ export const SerapistCard = (props: Props) => {
           viewBox='0 0 32 32'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
+          className='transition-colors'
         >
           <path
             d='M16 2.66667L20.12 11.0133L29.3333 12.36L22.6667 18.8533L24.24 28.0133L16 23.6933L7.76 28.0133L9.33333 18.8533L2.66667 12.36L11.88 11.0133L16 2.66667Z'
-            stroke='rgb(254, 44, 85)'
+            stroke='currentColor'
             strokeWidth='2'
             strokeLinecap='round'
             strokeLinejoin='round'

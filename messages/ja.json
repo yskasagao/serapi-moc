@@ -2,6 +2,9 @@
   "serapistList": {
     "title": "セラピスト一覧"
   },
+  "liveSerapistList": {
+    "title": "LIVE配信中"
+  },
   "shopList": {
     "title": "店舗一覧"
   },

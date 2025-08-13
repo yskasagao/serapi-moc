@@ -35,13 +35,13 @@ export const CommentCard = (props: Props) => {
     )
   }
   return (
-    <Card className='border-l-4 border-l-[#ff4b5c]'>
+    <Card className='border-l-4 border-l-brand-ui-static'>
       <CardContent className='p-4'>
         <div className='relative flex flex-col items-center justify-center rounded bg-gray-50 p-4'>
           <div className='absolute inset-0 bg-gray-100 blur-sm'></div>
           <div className='relative z-10 flex flex-col items-center'>
-            <LockKeyholeOpen className='mb-2 h-6 w-6 text-[#ff4b5c]' />
-            <p className='text-center text-sm font-bold text-[#ff4b5c]'>{t('lock')}</p>
+            <LockKeyholeOpen className='mb-2 h-6 w-6 text-brand-icon-static' />
+            <p className='text-center text-sm font-bold text-brand-ui-static'>{t('lock')}</p>
           </div>
         </div>
       </CardContent>

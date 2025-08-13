@@ -41,10 +41,10 @@ export const ProfileView = (props: Props) => {
               )}
             </div>
             <div className='bg-accent flex min-w-[120px] items-center justify-center space-x-2 rounded-full px-4 py-2'>
-              <Heart className='h-5 w-5 text-[#ff7e8a]' />
+              <Heart className='h-5 w-5 text-brand-icon-static' />
               <span className='text-base font-medium'>{0}</span>
             </div>
-            <h2 className='text-xl font-bold text-[#ff7e8a]'>{props.user.name}</h2>
+            <h2 className='text-xl font-bold text-brand-ui-static'>{props.user.name}</h2>
             <p className='text-muted-foreground text-center text-sm'>{props.user.message}</p>
           </div>
         </CardContent>

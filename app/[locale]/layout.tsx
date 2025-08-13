@@ -1,10 +1,9 @@
 import './globals.css'
 import { notFound } from 'next/navigation'
-import { getServerSession } from 'next-auth'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { getAuthOptions } from '@/lib/auth'
+import { getSessionWithDevBypass } from '@/lib/get-session-with-dev-bypass'
 import { NextAuthProvider } from '@/providers/next-auth-provider'
 import { APP_NAME } from '@/lib/constants'
 
@@ -27,7 +26,7 @@ export default async function RootLayout(props: Props) {
     notFound()
   }
   const messages = await getMessages()
-  const session = await getServerSession(getAuthOptions())
+  const session = await getSessionWithDevBypass()
   return (
     <html lang={params.locale}>
       <body>

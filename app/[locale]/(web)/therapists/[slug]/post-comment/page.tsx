@@ -36,13 +36,15 @@ const Page = async (props: Props) => {
   
   const anonymousIcon = presetUserIconMap.get(getRandomArbitrary(1, presetUserIconMap.size + 1))
   return (
-    <div className='mx-auto max-w-[380px] px-4'>
-      <Breadcrumb
-        items={[
-          { link: `/therapists/${params.slug}`, label: serapistar.nickname },
-          { label: 'コメント投稿' },
-        ]}
-      />
+    <div className='container mx-auto max-w-2xl px-4 py-6'>
+      <div className='mb-4 border-b border-gray-100 pb-3'>
+        <Breadcrumb
+          items={[
+            { link: `/therapists/${params.slug}`, label: serapistar.nickname },
+            { label: 'コメント投稿' },
+          ]}
+        />
+      </div>
       <Form user={loginUser} targetSlug={params.slug} anonymousIcon={anonymousIcon ?? ''} />
     </div>
   )

@@ -27,7 +27,7 @@ export const CommentsModal = (props: Props) => {
       <DialogContent className='border-custom w-full sm:max-w-[640px]'>
         <DialogHeader className='border-b pb-4'>
           <DialogTitle className='flex items-center text-base font-medium text-gray-700'>
-            <MessageSquare className='mr-2 h-5 w-5 text-[#ff7e8a]' />
+            <MessageSquare className='mr-2 h-5 w-5 text-brand-icon-static' />
             口コミ・ファンメ
           </DialogTitle>
         </DialogHeader>
@@ -50,7 +50,7 @@ export const CommentsModal = (props: Props) => {
                   <p className='text-sm'>{comment.text}</p>
                 </div>
                 <div className='flex items-center space-x-1'>
-                  <Heart className='h-4 w-4 text-[#ff7e8a]' />
+                  <Heart className='h-4 w-4 text-brand-icon-static' />
                   <span className='text-muted-foreground text-xs'>0</span>
                 </div>
               </div>

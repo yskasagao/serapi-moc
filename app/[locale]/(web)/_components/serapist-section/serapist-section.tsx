@@ -11,15 +11,19 @@ type Props = {
 export const SerapistSection = (props: Props) => {
   const pageTranslation = useTranslations('serapistList')
   const commonTranslation = useTranslations('common')
+  
+  // LIVE配信中のセラピストは除外（重複表示回避）
+  const nonLiveSerapists = props.serapistList.filter(serapist => serapist.isLive !== true)
+  
   return (
     <div>
       <SectionTitle>{pageTranslation('title')}</SectionTitle>
       <div>
-        {props.serapistList.length === 0 && (
+        {nonLiveSerapists.length === 0 && (
           <p className='text-center'>セラピストデータがありません。</p>
         )}
         <div className='grid grid-cols-2 justify-items-center gap-4 sm:grid-cols-3 md:grid-cols-4'>
-          {props.serapistList.map((v) => {
+          {nonLiveSerapists.map((v) => {
             return (
               <Link href={`/therapists/${v.slug}`} key={v.slug}>
                 <SerapistCard key={v.slug} serapist={v} />

@@ -18,7 +18,7 @@ export const BookmarksModal = ({ isOpen, onClose, bookmarks }: BookmarksModalPro
       <DialogContent className='border-custom w-full sm:max-w-[640px]'>
         <DialogHeader className='border-b pb-4'>
           <DialogTitle className='flex items-center text-base font-medium text-gray-700'>
-            <Bookmark className='mr-2 h-5 w-5 text-[#ff7e8a]' />
+            <Bookmark className='mr-2 h-5 w-5 text-brand-icon-static' />
             コレクション
           </DialogTitle>
         </DialogHeader>
@@ -53,8 +53,8 @@ export const BookmarksModal = ({ isOpen, onClose, bookmarks }: BookmarksModalPro
                   </div>
                 </div>
                 <div className='flex items-center space-x-1'>
-                  <Star className='h-5 w-5 fill-[#fe2c55] text-[#fe2c55]' />
-                  <span className='text-[#fe2c55]'>+{totalStar}</span>
+                  <Star className='h-5 w-5 fill-brand-icon-static text-brand-icon-static' />
+                  <span className='text-brand-icon-static'>+{totalStar}</span>
                 </div>
               </Link>
             )

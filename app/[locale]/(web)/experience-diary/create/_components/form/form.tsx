@@ -152,14 +152,14 @@ export const Form = (props: Props) => {
       <div className='mb-4 border-b border-gray-100 pb-3'>
         <Link
           href='/experience-diary'
-          className='group inline-flex items-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-[#ff7e8a] shadow-sm transition-all duration-200 hover:border-[#ff7e8a] hover:bg-gray-50'
+          className='group inline-flex items-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-brand-ui shadow-sm transition-all duration-200 hover:border-brand-ui hover:bg-gray-50'
         >
           <ArrowLeft className='mr-2 h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5' />
           <span className='tracking-wide'>一覧に戻る</span>
         </Link>
       </div>
       <h1 className='mb-6 flex items-center text-base font-medium text-gray-700'>
-        <FileText className='mr-2 h-5 w-5 text-[#ff7e8a]' />
+        <FileText className='mr-2 h-5 w-5 text-brand-icon-static' />
         体験日記を作成
       </h1>
       <form
@@ -255,7 +255,7 @@ export const Form = (props: Props) => {
             <Button
               type='submit'
               disabled={isPending}
-              className='inline-flex flex-1 items-center justify-center rounded-md border border-[#ff7e8a] bg-[#ff7e8a] px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-[#ff6b7a]'
+              className='inline-flex flex-1 items-center justify-center rounded-md border border-brand-ui bg-brand-ui px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-brand-ui-hover'
             >
               {isPending ? '投稿中' : '投稿する'}
             </Button>
@@ -265,7 +265,7 @@ export const Form = (props: Props) => {
               disabled={isGeneratingImage}
               className='group inline-flex flex-1 items-center justify-center rounded-md border border-gray-800 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm transition-all duration-200 hover:border-black hover:bg-gray-50'
             >
-              <Camera className='mr-2 h-4 w-4 text-[#ff7e8a] transition-transform duration-200 group-hover:scale-110' />
+              <Camera className='mr-2 h-4 w-4 text-brand-icon transition-transform duration-200 group-hover:scale-110' />
               {isGeneratingImage
                 ? `生成中... ${generationProgress}%`
                 : totalPages > 1

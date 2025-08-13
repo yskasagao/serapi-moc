@@ -4,7 +4,9 @@ import { FashionBackground } from '@/components/fashion-background'
 import { fetchCompanies } from '@/lib/server-only/company/fetch-companies'
 import { type SerapistPaginator } from '@/app/api/serapist/schema'
 import { API_ORIGIN } from '@/lib/constants'
+import { generateMockLiveStoreSNSAccounts } from '@/lib/mock-data/store-sns-account'
 import { SerapistSection } from './_components/serapist-section'
+import { LiveSerapistSection } from './_components/live-serapist-section'
 import { Toaster } from '@/app/_components/toaster'
 import { AgeGate } from '@/components/age-gate'
 export const dynamic = 'force-dynamic'
@@ -21,6 +23,10 @@ const fetchActive = async (): Promise<SerapistPaginator> => {
 export default async function Page() {
   const paginator = await fetchActive()
   const companies = await fetchCompanies()
+  
+  // 店舗SNSアカウントのモックデータを取得
+  const storeSNSAccounts = generateMockLiveStoreSNSAccounts()
+  
   return (
     <>
       <AgeGate />
@@ -28,6 +34,7 @@ export default async function Page() {
       <main className='z-1 container relative mx-auto mt-16 max-w-[980px] px-4 py-8'>
         <Toaster />
         <Banner />
+        <LiveSerapistSection serapistList={paginator.data} storeSNSAccountList={storeSNSAccounts} />
         <SerapistSection serapistList={paginator.data} />
         <CompanyList companies={companies} />
       </main>

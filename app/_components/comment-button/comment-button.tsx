@@ -11,7 +11,7 @@ export const CommentButton = (props: Props) => {
   return (
     <button
       {...rest}
-      className={`flex h-12 w-full items-center justify-center bg-[#FE2C55] font-bold text-white ${
+      className={`flex h-12 w-full items-center justify-center rounded-md bg-brand-ui font-bold text-white transition-colors duration-200 hover:bg-brand-ui-hover focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-ui focus-visible:ring-offset-2 ${
         rest.disabled && 'opacity-60'
       } ${className}`}
     >

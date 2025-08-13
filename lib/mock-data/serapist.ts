@@ -31,6 +31,7 @@ export const generateMockSerapist = (index: number): Serapist => {
     twitter: twitterIds[index % twitterIds.length],
     tiktok: tiktokIds[index % tiktokIds.length],
     avatar: `https://picsum.photos/200/200?random=${index}`, // ランダムな画像
+    isLive: index === 0 || index === 2 || index === 7, // インデックス0,2,7のセラピストがライブ配信中
     parameter: {
       like: Math.floor(Math.random() * 5) + 1,      // 1-5の評価
       service: Math.floor(Math.random() * 5) + 1,   // 1-5の評価

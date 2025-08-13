@@ -95,7 +95,7 @@ export const EditProfileModal = (props: Props) => {
                       setPresetIcon(v)
                     }}
                     className={`relative h-12 w-12 overflow-hidden rounded-full border-2 transition-colors ${
-                      v === presetIcon ? 'border-[#ff7e8a]' : 'border-transparent'
+                      v === presetIcon ? 'border-brand-ui' : 'border-transparent'
                     }`}
                   >
                     <Image

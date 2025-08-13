@@ -56,13 +56,24 @@ module.exports = {
           focus: '#e6f3ff',
           disabled: '#f3f4f6',
         },
-        // ブランドカラー
+        // ブランドカラー - インタラクション別統一システム
         brand: {
-          primary: '#ff7e8a', // ピンク - メインカラー
-          secondary: '#4a4a4a', // ダークグレー - セカンダリカラー
-          accent: '#d1d5db', // グレー300 - アクセントカラー（修正）
-          light: '#ff9eb8', // ライトピンク - ホバー用など
-          dark: '#ff6b7a', // ダークピンク - ホバー用など
+          // アイコン系統
+          'icon': '#FE2C55',           // インタラクティブアイコン
+          'icon-hover': '#E8254A',     // インタラクティブアイコンホバー
+          'icon-static': '#FE2C55',    // 非インタラクティブアイコン（装飾等）
+          
+          // UIパーツ系統
+          'ui': '#ff7e8a',             // インタラクティブUIパーツ
+          'ui-hover': '#ff6b7a',       // インタラクティブUIパーツホバー
+          'ui-static': '#ff7e8a',      // 非インタラクティブUIパーツ（装飾等）
+          
+          // 後方互換性維持（段階的移行用）
+          primary: '#ff7e8a',
+          secondary: '#4a4a4a',
+          accent: '#d1d5db',
+          light: '#ff9eb8',
+          dark: '#ff6b7a',
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

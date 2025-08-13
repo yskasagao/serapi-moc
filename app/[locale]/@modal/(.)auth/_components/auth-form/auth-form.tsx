@@ -19,18 +19,18 @@ export const AuthForm = ({ featureName }: AuthFormProps) => {
       {/* 機能一覧 */}
       <div className="mb-8">
         <div className="flex justify-center">
-          <div className="bg-white rounded-lg p-4 border border-[rgb(255,126,138)] shadow-sm max-w-[480px] w-full">
+          <div className="bg-white rounded-lg p-4 border border-brand-ui-static shadow-sm max-w-[480px] w-full">
             <ul className="space-y-2.5">
               <li className="flex items-center gap-3 text-sm text-gray-700">
-                <div className="w-1.5 h-1.5 bg-[rgb(255,126,138)] rounded-full flex-shrink-0"></div>
+                <div className="w-1.5 h-1.5 bg-brand-ui-static rounded-full flex-shrink-0"></div>
                 <span>逆オファー、体験談のSERAPIへの投稿</span>
               </li>
               <li className="flex items-center gap-3 text-sm">
-                <div className="w-1.5 h-1.5 bg-[rgb(255,126,138)] rounded-full flex-shrink-0"></div>
-                <span className="font-semibold text-[rgb(255,126,138)]">口コミ・ファンメ投稿</span>
+                <div className="w-1.5 h-1.5 bg-brand-ui-static rounded-full flex-shrink-0"></div>
+                <span className="font-semibold text-brand-ui-static">口コミ・ファンメ投稿</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-gray-700">
-                <div className="w-1.5 h-1.5 bg-[rgb(255,126,138)] rounded-full flex-shrink-0"></div>
+                <div className="w-1.5 h-1.5 bg-brand-ui-static rounded-full flex-shrink-0"></div>
                 <span>ブックマーク</span>
               </li>
             </ul>
@@ -70,9 +70,9 @@ export const AuthForm = ({ featureName }: AuthFormProps) => {
         <div className="text-center pt-2">
           <p className="text-xs text-gray-500 leading-relaxed">
             ログインすることで、
-            <Link href="/terms" className="text-[#ff7e8a] hover:underline">利用規約</Link>
+            <Link href="/terms" className="text-brand-ui hover:underline">利用規約</Link>
             および
-            <Link href="/privacy" className="text-[#ff7e8a] hover:underline">プライバシーポリシー</Link>
+            <Link href="/privacy" className="text-brand-ui hover:underline">プライバシーポリシー</Link>
             に同意したものとします
           </p>
         </div>

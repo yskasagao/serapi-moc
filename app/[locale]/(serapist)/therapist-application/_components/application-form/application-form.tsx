@@ -24,15 +24,15 @@ const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
     ...provided,
     borderColor: '#e6e6e6',
     '&:hover': {
-      borderColor: '#ff7e8a',
+      borderColor: '#ff7e8a', // brand-ui
     },
   }),
   option: (provided: CSSObjectWithLabel, state: { isSelected: boolean }) => ({
     ...provided,
-    backgroundColor: state.isSelected ? '#ff7e8a' : 'white',
+    backgroundColor: state.isSelected ? '#ff7e8a' : 'white', // brand-ui
     color: state.isSelected ? 'white' : '#4a4a4a',
     '&:hover': {
-      backgroundColor: '#ff9eb8',
+      backgroundColor: '#ff9eb8', // brand-light
       color: 'white',
     },
   }),
@@ -120,18 +120,18 @@ export const ApplicationForm = (props: Props) => {
           <form action={formAction} className='space-y-6'>
             <div className='space-y-2'>
               <Label htmlFor='nickname' className='text-[#4a4a4a]'>
-                セラピスト名 <span className='text-[#ff7e8a]'>*</span>
-                <span className='ml-1 text-sm text-[#ff7e8a]'>(必須)</span>
+                セラピスト名 <span className='text-brand-ui-static'>*</span>
+                <span className='ml-1 text-sm text-brand-ui-static'>(必須)</span>
               </Label>
               <Input
                 {...register('nickname')}
-                className='w-full border-[#e6e6e6] focus:border-[#ff7e8a] focus:ring-[#ff7e8a]'
+                className='w-full border-[#e6e6e6] focus:border-brand-ui focus:ring-brand-ui'
               />
             </div>
             <div className='space-y-2'>
               <Label htmlFor='shopid' className='text-[#4a4a4a]'>
-                店舗 <span className='text-[#ff7e8a]'>*</span>
-                <span className='ml-1 text-sm text-[#ff7e8a]'>(必須)</span>
+                店舗 <span className='text-brand-ui-static'>*</span>
+                <span className='ml-1 text-sm text-brand-ui-static'>(必須)</span>
               </Label>
               <Controller
                 name='shopId'
@@ -162,14 +162,14 @@ export const ApplicationForm = (props: Props) => {
               </Label>
               <Input
                 {...register('customShop')}
-                className='w-full border-[#e6e6e6] focus:border-[#ff7e8a] focus:ring-[#ff7e8a]'
+                className='w-full border-[#e6e6e6] focus:border-brand-ui focus:ring-brand-ui'
               />
             </div>
 
             <div className='space-y-2'>
               <Label htmlFor='tiktok' className='text-[#4a4a4a]'>
-                TikTok <span className='text-[#ff7e8a]'>*</span>
-                <span className='ml-1 text-sm text-[#ff7e8a]'>(必須)</span>
+                TikTok <span className='text-brand-ui-static'>*</span>
+                <span className='ml-1 text-sm text-brand-ui-static'>(必須)</span>
               </Label>
               <div className='relative'>
                 <div className='text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 transform font-medium'>
@@ -178,7 +178,7 @@ export const ApplicationForm = (props: Props) => {
                 <Input
                   {...register('tiktok')}
                   placeholder='username'
-                  className='w-full border-[#e6e6e6] pl-8 focus:border-[#ff7e8a] focus:ring-[#ff7e8a]'
+                  className='w-full border-[#e6e6e6] pl-8 focus:border-brand-ui focus:ring-brand-ui'
                 />
               </div>
             </div>
@@ -194,7 +194,7 @@ export const ApplicationForm = (props: Props) => {
                 <Input
                   {...register('twitter')}
                   placeholder='username'
-                  className='w-full border-[#e6e6e6] pl-8 focus:border-[#ff7e8a] focus:ring-[#ff7e8a]'
+                  className='w-full border-[#e6e6e6] pl-8 focus:border-brand-ui focus:ring-brand-ui'
                 />
               </div>
             </div>
@@ -207,7 +207,7 @@ export const ApplicationForm = (props: Props) => {
                 <Input
                   {...register('age', { valueAsNumber: true })}
                   type='number'
-                  className='w-full border-[#e6e6e6] focus:border-[#ff7e8a] focus:ring-[#ff7e8a]'
+                  className='w-full border-[#e6e6e6] focus:border-brand-ui focus:ring-brand-ui'
                 />
               </div>
               <div className='space-y-2'>
@@ -217,7 +217,7 @@ export const ApplicationForm = (props: Props) => {
                 <Input
                   {...register('height', { valueAsNumber: true })}
                   type='number'
-                  className='w-full border-[#e6e6e6] focus:border-[#ff7e8a] focus:ring-[#ff7e8a]'
+                  className='w-full border-[#e6e6e6] focus:border-brand-ui focus:ring-brand-ui'
                 />
               </div>
               <div className='space-y-2'>
@@ -227,7 +227,7 @@ export const ApplicationForm = (props: Props) => {
                 <Input
                   {...register('weight', { valueAsNumber: true })}
                   type='number'
-                  className='w-full border-[#e6e6e6] focus:border-[#ff7e8a] focus:ring-[#ff7e8a]'
+                  className='w-full border-[#e6e6e6] focus:border-brand-ui focus:ring-brand-ui'
                 />
               </div>
             </div>

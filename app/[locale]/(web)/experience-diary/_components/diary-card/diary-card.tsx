@@ -13,7 +13,7 @@ export const DiaryCard = (props: { diary: Diary }) => {
       <Link href={`/experience-diary/${props.diary.id}`}>
         <div className='p-5'>
           <div className='mb-3'>
-            <h3 className='text-lg font-semibold text-[#4a4a4a] transition-colors duration-200 hover:text-[#ff7e8a]'>
+            <h3 className='text-lg font-semibold text-[#4a4a4a] transition-colors duration-200 hover:text-brand-ui'>
               {props.diary.title}
             </h3>
             <div className='mt-1 flex items-center justify-between'>
@@ -21,14 +21,14 @@ export const DiaryCard = (props: { diary: Diary }) => {
                 {dayjs(props.diary.createdAt).tz().format('YYYY.MM.DD')}
               </span>
               <div className='flex items-center space-x-1'>
-                <Heart className='h-4 w-4 text-[#ff7e8a]' />
+                <Heart className='h-4 w-4 text-brand-icon-static' />
                 <span className='text-sm text-gray-500'>{props.diary.like}</span>
               </div>
             </div>
           </div>
 
           {/* 著者情報 */}
-          <div className='mb-3 border-l-4 border-[#ff7e8a] pl-3 italic text-gray-600'>
+          <div className='mb-3 border-l-4 border-brand-ui-static pl-3 italic text-gray-600'>
             {props.diary.User.name}
           </div>
 

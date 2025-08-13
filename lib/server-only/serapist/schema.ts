@@ -6,6 +6,7 @@ export const SerapistSchema = z.object({
   twitter: z.string().nullable(),
   tiktok: z.string().nullable(),
   avatar: z.string().nullable(),
+  isLive: z.boolean().optional(),
   parameter: z
     .object({
       like: z.number(),
