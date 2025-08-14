@@ -1,20 +1,28 @@
-import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth/next'
-import { getAuthOptions } from '@/lib/auth'
+'use client'
 
-export default async function Page() {
-  const session = await getServerSession(getAuthOptions())
-  if (session) {
-    redirect('/experience-diary')
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { AuthDialog } from '../@modal/(.)auth/_components/auth-dialog'
+import { AuthForm } from '../@modal/(.)auth/_components/auth-form'
+
+export default function Page() {
+  const router = useRouter()
+  const [showModal, setShowModal] = useState(true)
+
+  const handleClose = () => {
+    setShowModal(false)
+    router.back()
   }
-  
-  // 通常の認証ページ（モーダルが優先されるため、この内容は基本的に表示されない）
+
+  // 開発時のモーダル確認のため、認証状態に関係なくモーダルを表示
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold mb-4">ログインが必要です</h1>
-        <p className="text-gray-600">体験日記を書くにはログインしてください。</p>
-      </div>
-    </div>
+    <>
+      {showModal && (
+        <AuthDialog>
+          <AuthForm featureName="体験日記" />
+        </AuthDialog>
+      )}
+    </>
   )
 }
