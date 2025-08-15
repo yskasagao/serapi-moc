@@ -23,7 +23,7 @@ export const BookmarksModal = ({ isOpen, onClose, bookmarks }: BookmarksModalPro
               コレクション
             </div>
           }
-          size="medium-responsive"
+          size="large"
           onClose={onClose}
         >
           <div className='hidden-scrollbar grid max-h-[500px] gap-4 overflow-y-auto py-4'>

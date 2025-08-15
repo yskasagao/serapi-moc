@@ -32,7 +32,7 @@ export const CommentsModal = (props: Props) => {
               口コミ・ファンメ
             </div>
           }
-          size="medium-responsive"
+          size="large"
           onClose={props.onClose}
         >
           <div className='hidden-scrollbar grid max-h-[500px] gap-4 overflow-y-auto py-4'>

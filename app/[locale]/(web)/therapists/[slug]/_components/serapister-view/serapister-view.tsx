@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { BookmarkButton } from '../bookmark-button'
 import { CommentCard } from '../comment-card/comment-card'
+import { MediaGallery } from '../media-gallery'
 import { type SerapistarDetail } from './type'
 import { Toaster } from '@/app/_components/toaster'
 import { FashionBackground } from '@/components/fashion-background'
@@ -47,6 +48,37 @@ export const SerapisterView = ({ serapistar, message, isBookmarked }: Props) => 
   const router = useRouter()
   const pathname = usePathname()
   const [isFlush, setIsFlush] = useState<boolean>(false)
+  
+  // サンプルメディアデータ（実際のデータ構造に合わせて調整してください）
+  const sampleMediaItems = [
+    {
+      id: '1',
+      type: 'image' as const,
+      url: 'https://picsum.photos/800/600?random=1',
+      alt: 'セラピスト画像1'
+    },
+    {
+      id: '2',
+      type: 'voice' as const,
+      url: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav',
+      alt: 'セラピストからのメッセージ',
+      duration: 45
+    },
+    {
+      id: '3',
+      type: 'video' as const,
+      url: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+      thumbnail: 'https://picsum.photos/800/600?random=3',
+      alt: 'セラピスト動画1'
+    },
+    {
+      id: '4',
+      type: 'voice' as const,
+      url: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.wav',
+      alt: '施術について',
+      duration: 123
+    }
+  ]
   useEffect(() => {
     if (!isFlush && message) {
       setIsFlush(true)
@@ -125,6 +157,14 @@ export const SerapisterView = ({ serapistar, message, isBookmarked }: Props) => 
               </div>
             </div>
           </div>
+
+
+          {/* メディアギャラリーセクション */}
+          <MediaGallery mediaItems={sampleMediaItems} />
+
+          {/* セクション間のスペース */}
+          <div className='h-8'></div>
+
           <div className='w-full max-w-2xl rounded-b-lg bg-gray-50 px-4 pb-8'>
             {/* Message Button */}
             <Button

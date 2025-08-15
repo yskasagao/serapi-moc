@@ -1,0 +1,1 @@
+export { StoreTherapistsList } from './store-therapists-list'

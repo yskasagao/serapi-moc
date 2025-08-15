@@ -8,8 +8,6 @@ export const generateMockStoreSNSAccount = (index: number): StoreSNSAccount => {
     'ヘルスケア仙台', 'アロマ広島', 'エステ千葉', 'ボディケア沖縄'
   ]
   
-  const platforms = ['tiktok', 'twitcasting'] as const
-  
   // 7エリア区分ID（lib/constants.ts の areaGroupNameMap のキー）
   const areaGroupIds = [
     'hokkaido', 'tohoku', 'kanto', 'chubu', 
@@ -17,7 +15,6 @@ export const generateMockStoreSNSAccount = (index: number): StoreSNSAccount => {
   ]
   
   const storeName = storeNames[index % storeNames.length]
-  const platform = platforms[index % platforms.length]
   
   // 各店舗に1-3個のエリアをランダムに割り当て
   const areaCount = Math.floor(Math.random() * 3) + 1 // 1-3個
@@ -30,8 +27,6 @@ export const generateMockStoreSNSAccount = (index: number): StoreSNSAccount => {
     }
   }
   
-  // プラットフォーム別のハンドル生成（意味のあるハンドル名に修正）
-  const handlePrefix = '@'
   // 店舗名をローマ字風に変換
   const romanizedNames = [
     'relaxation_tokyo', 'healing_spa_osaka', 'wellness_nagoya', 'massage_fukuoka',
@@ -39,15 +34,30 @@ export const generateMockStoreSNSAccount = (index: number): StoreSNSAccount => {
     'healthcare_sendai', 'aroma_hiroshima', 'este_chiba', 'bodycare_okinawa'
   ]
   const romanizedName = romanizedNames[index % romanizedNames.length]
-  const handle = `${handlePrefix}${romanizedName}`
+  
+  // 複数プラットフォーム対応（1-2個のプラットフォーム）
+  const platformCount = Math.random() > 0.6 ? 2 : 1 // 40%の確率で2つのプラットフォーム
+  const allPlatforms = ['tiktok', 'twitcasting'] as const
+  const platforms = []
+  
+  for (let i = 0; i < platformCount; i++) {
+    const platform = allPlatforms[i % allPlatforms.length]
+    const handle = `@${romanizedName}${platformCount > 1 ? `_${platform}` : ''}`
+    const isLive = (index === 1 || index === 4 || index === 6) && i === 0 // 最初のプラットフォームがライブ中
+    
+    platforms.push({
+      platform,
+      handle,
+      isLive
+    })
+  }
   
   return {
     id: `store-sns-${index}`,
     name: `${storeName}店`,
     avatar: `https://picsum.photos/200/200?random=store${index}`,
-    platform,
-    handle,
-    isLive: index === 1 || index === 4 || index === 6, // インデックス1,4,6の店舗がライブ配信中
+    officialUrl: `https://example.com/store-${romanizedName}`, // 公式サイトURL
+    platforms,
     areaGroups: selectedAreas,
   }
 }
@@ -64,5 +74,7 @@ export const generateMockStoreSNSAccounts = (count: number = 12): StoreSNSAccoun
 // ライブ配信中の店舗SNSアカウントのみを取得
 export const generateMockLiveStoreSNSAccounts = (): StoreSNSAccount[] => {
   const allAccounts = generateMockStoreSNSAccounts()
-  return allAccounts.filter(account => account.isLive === true)
+  return allAccounts.filter(account => 
+    account.platforms?.some(platform => platform.isLive === true) ?? false
+  )
 }

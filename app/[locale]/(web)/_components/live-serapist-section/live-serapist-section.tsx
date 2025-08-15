@@ -18,8 +18,10 @@ export const LiveSerapistSection = (props: Props) => {
   // ライブ配信中のセラピストのみをフィルタリング
   const liveSerapists = props.serapistList.filter(serapist => serapist.isLive === true)
   
-  // ライブ配信中の店舗SNSアカウントのみをフィルタリング
-  const liveStoreSNSAccounts = props.storeSNSAccountList.filter(account => account.isLive === true)
+  // ライブ配信中の店舗SNSアカウントのみをフィルタリング（新スキーマ対応）
+  const liveStoreSNSAccounts = props.storeSNSAccountList.filter(account => 
+    account.platforms?.some(platform => platform.isLive === true) ?? false
+  )
   
   // ライブ配信中のコンテンツがない場合は何も表示しない
   if (liveSerapists.length === 0 && liveStoreSNSAccounts.length === 0) {

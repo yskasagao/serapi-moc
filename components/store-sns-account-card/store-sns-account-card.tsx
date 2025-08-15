@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { type StoreSNSAccount } from '@/app/api/store-sns-account/schema'
 import { areaGroupNameMap } from '@/lib/constants'
@@ -11,22 +12,26 @@ type Props = {
 }
 
 export const StoreSNSAccountCard = (props: Props) => {
-  // ライブ配信中の場合の特別なスタイリング
-  const isLive = props.storeSNSAccount.isLive === true
+  // 新しいスキーマでのライブ配信中判定
+  const isLive = props.storeSNSAccount.platforms?.some(platform => platform.isLive === true) ?? false
   const cardClasses = isLive
     ? 'flex aspect-[228/454] w-full min-w-[163px] max-w-[228px] flex-col overflow-hidden rounded-lg bg-white shadow-lg ring-2 ring-red-200 ring-opacity-60'
     : 'flex aspect-[228/454] w-full min-w-[163px] max-w-[228px] flex-col overflow-hidden rounded-lg bg-white shadow-md'
 
-  // プラットフォーム別アイコン
-  const getPlatformIcon = () => {
-    switch (props.storeSNSAccount.platform) {
-      case 'tiktok':
-        return <span className='text-xs font-bold text-black'>TT</span>
-      case 'twitcasting':
-        return <Image src={TwitcastIcon} alt="TwitCasting" className='h-4 w-4' />
-      default:
-        return null
-    }
+  // 表示用のプラットフォーム情報を取得（最初のプラットフォーム）
+  const primaryPlatform = props.storeSNSAccount.platforms?.[0]
+  
+  // プラットフォーム別アイコンコンポーネント
+  const PlatformIcon = ({ platform, handle, isLive }: { platform: string, handle: string, isLive?: boolean }) => {
+    const iconElement = platform === 'tiktok' 
+      ? <span className='text-lg font-bold text-black'>TT</span>
+      : <Image src={TwitcastIcon} alt="TwitCasting" className='h-6 w-6' />
+
+    return (
+      <div className='flex items-center justify-center rounded-lg bg-white p-2 shadow-md border w-8 h-8'>
+        {iconElement}
+      </div>
+    )
   }
 
   // エリア区分を日本語名で表示
@@ -40,10 +45,11 @@ export const StoreSNSAccountCard = (props: Props) => {
   }
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      className={cardClasses}
-    >
+    <Link href={`/stores/${props.storeSNSAccount.id}`}>
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        className={cardClasses}
+      >
       <div className='relative flex flex-grow items-center justify-center bg-gray-100'>
         {/* ライブ配信中インジケーター */}
         {isLive && (
@@ -54,8 +60,15 @@ export const StoreSNSAccountCard = (props: Props) => {
         )}
 
         {/* プラットフォームアイコン */}
-        <div className='absolute top-2 right-2 z-10 flex items-center justify-center rounded-full bg-white p-1.5 shadow-md'>
-          {getPlatformIcon()}
+        <div className='absolute top-2 right-2 z-10 flex gap-1'>
+          {props.storeSNSAccount.platforms?.map((platformData, index) => (
+            <PlatformIcon
+              key={`${platformData.platform}-${index}`}
+              platform={platformData.platform}
+              handle={platformData.handle}
+              isLive={platformData.isLive}
+            />
+          ))}
         </div>
         
         <div className='aspect-square w-[88%] overflow-hidden rounded-lg'>
@@ -74,7 +87,7 @@ export const StoreSNSAccountCard = (props: Props) => {
           {props.storeSNSAccount.name}
         </h3>
         <p className='mb-1 truncate text-xs text-gray-600'>
-          {props.storeSNSAccount.handle}
+          {primaryPlatform?.handle || ''}
         </p>
         {/* エリア区分表示 */}
         {getAreaGroupNames() && (
@@ -83,6 +96,7 @@ export const StoreSNSAccountCard = (props: Props) => {
           </div>
         )}
       </div>
-    </motion.div>
+      </motion.div>
+    </Link>
   )
 }

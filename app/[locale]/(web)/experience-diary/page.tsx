@@ -38,7 +38,7 @@ export default async function Page(props: Props) {
   return (
     <div>
       <HeroBanner />
-      <div className='mx-auto max-w-[1400px] px-4 py-8'>
+      <div className='mx-auto max-w-[980px] px-4 py-8'>
         <DiarySearchView data={result.data} nextCursor={result.nextCursor} sort={result.sort} />
       </div>
     </div>
