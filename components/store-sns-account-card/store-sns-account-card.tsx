@@ -61,7 +61,7 @@ export const StoreSNSAccountCard = (props: Props) => {
 
         {/* プラットフォームアイコン */}
         <div className='absolute top-2 right-2 z-10 flex gap-1'>
-          {props.storeSNSAccount.platforms?.map((platformData, index) => (
+          {props.storeSNSAccount.platforms?.filter(platformData => platformData.isLive === true).map((platformData, index) => (
             <PlatformIcon
               key={`${platformData.platform}-${index}`}
               platform={platformData.platform}
