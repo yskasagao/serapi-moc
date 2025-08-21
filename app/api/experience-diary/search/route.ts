@@ -1,6 +1,6 @@
 // GETでデータを返す例（query paramでページ指定など）
 import prisma from '@/lib/prisma'
-import { type Prisma } from '@prisma/client/media-db'
+import { type Prisma } from '@prisma/client'
 import z from 'zod'
 import { DiarySchema, ResponseDataSchema } from './schema'
 import { generateMockDiaryPagination, generateMockDiarySearchResults, useMockData } from '@/lib/mock-data'
@@ -11,14 +11,15 @@ export const GET = async (req: Request) => {
   const sort = searchParams.get('sort') ?? 'latest'
   const cursor = searchParams.get('cursor')
   const query = searchParams.get('q') ?? undefined
+  const themeId = searchParams.get('themeId') ?? undefined
 
   // モックデータを使用する場合
   if (useMockData()) {
     if (query) {
-      const mockData = generateMockDiarySearchResults(query, 1, limit)
+      const mockData = generateMockDiarySearchResults(query, 1, limit, themeId)
       return Response.json(mockData)
     } else {
-      const mockData = generateMockDiaryPagination(1, limit, 80, sort as 'latest' | 'like' | 'oldest')
+      const mockData = generateMockDiaryPagination(1, limit, 80, sort as 'latest' | 'like' | 'oldest', themeId)
       return Response.json(mockData)
     }
   }

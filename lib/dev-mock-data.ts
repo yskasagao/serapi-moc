@@ -6,27 +6,7 @@ export const MOCK_USER_DATA: ProfileSchema = {
   image: 'https://via.placeholder.com/150',
   message: '開発用のユーザーです',
   Comment: [
-    {
-      id: 'mock-comment-1',
-      text: 'これは開発用のコメントです。',
-      isPublic: true,
-      createdAt: new Date('2024-01-15'),
-      Serapistar: {
-        slug: 'mock-serapist',
-        nickname: 'モックセラピスト',
-        avatar: 'https://via.placeholder.com/100',
-      },
-    },
-    {
-      id: 'mock-comment-2',
-      text: 'こちらも開発用のサンプルコメントです。',
-      isPublic: true,
-      createdAt: new Date('2024-01-10'),
-      Serapistar: {
-        slug: 'mock-serapist-2',
-        nickname: 'モックセラピスト2',
-        avatar: 'https://via.placeholder.com/100',
-      },
+
     },
   ],
   Bookmark: [

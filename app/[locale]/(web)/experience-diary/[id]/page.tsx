@@ -1,5 +1,6 @@
 import { DiarySchema } from '@/app/api/experience-diary/search/schema'
 import prisma from '@/lib/prisma'
+import { getMockDiaryDetail, generateFallbackMockDiary } from '@/lib/mock-data/diary-detail'
 import type { Metadata } from 'next'
 import { cache } from 'react'
 import { DiaryView } from './_components/diary-view'
@@ -21,6 +22,17 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 }
 
 const fetchDiary = cache(async (id: string) => {
+  // モックデータを使用する場合
+  if (process.env.USE_MOCK_DATA === 'true') {
+    const mockDiary = getMockDiaryDetail(id)
+    if (mockDiary) {
+      return mockDiary
+    }
+    // IDが見つからない場合はフォールバックデータを生成
+    return generateFallbackMockDiary(id)
+  }
+
+  // 実際のデータベースから取得
   const ret = await prisma.experienceDiary.findFirst({
     select: {
       id: true,
@@ -28,6 +40,7 @@ const fetchDiary = cache(async (id: string) => {
       text: true,
       createdAt: true,
       like: true,
+      themeId: true,
       ExperienceDiaryImage: {
         select: {
           image: true,
@@ -43,6 +56,12 @@ const fetchDiary = cache(async (id: string) => {
       id,
     },
   })
+  
+  if (!ret) {
+    // データベースにデータがない場合もフォールバックデータを使用
+    return generateFallbackMockDiary(id)
+  }
+  
   return DiarySchema.parse(ret)
 })
 

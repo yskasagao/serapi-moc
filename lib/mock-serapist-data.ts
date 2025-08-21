@@ -103,20 +103,7 @@ export const MOCK_SERAPIST_LIST: Record<string, SerapistarDetail> = {
       like: 5,
     },
   },
-  'qA2sD4fG6hJk': {
-    ...MOCK_SERAPIST_DATA,
-    id: 'mock-serapist-id-5',
-    slug: 'qA2sD4fG6hJk',
-    nickname: 'りん',
-    avatar: 'https://via.placeholder.com/200x200?text=りん',
-    tiktok: 'rin_sample',
-    SerapisterParameter: {
-      looks: 4,
-      service: 5,
-      physical: 5,
-      repeat: 4,
-      like: 4,
-    },
+
   },
 }
 

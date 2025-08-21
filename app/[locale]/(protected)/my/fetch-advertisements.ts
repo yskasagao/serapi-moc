@@ -1,6 +1,6 @@
 'use server'
 
-import type { Prisma } from '@prisma/client/company-db'
+import type { Prisma } from '@prisma/client'
 import { getServerSession } from 'next-auth/next'
 import { getAuthOptions } from '@/lib/auth'
 import companyPrisma from '@/lib/company-prisma'

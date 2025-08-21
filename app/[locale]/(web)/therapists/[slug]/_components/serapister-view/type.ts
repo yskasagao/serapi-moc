@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client/media-db'
+import { Prisma } from '@prisma/client'
 
 export const SerapistarDetailSelect = Prisma.validator<Prisma.SerapistarDefaultArgs>()({
   select: {

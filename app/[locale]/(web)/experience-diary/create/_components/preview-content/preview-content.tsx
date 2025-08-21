@@ -1,9 +1,11 @@
 import Image from 'next/image'
+import { getActiveThemes } from '@/lib/mock-data/diary-themes'
 
 type BasePreviewProps = {
   title: string
   text: string
   images: string[]
+  themeId?: string
   date: string
   isMobile: boolean
   userName: string
@@ -22,6 +24,12 @@ type NormalPreviewProps = BasePreviewProps & {
 type PreviewContentProps = NormalPreviewProps | ScreenShopPreviewProps
 
 export const PreviewContent = (props: PreviewContentProps) => {
+  // テーマ情報の取得
+  const activeThemes = getActiveThemes()
+  const selectedTheme = props.themeId ? activeThemes.find(t => t.id === props.themeId) : null
+  
+
+  
   // デバイスに応じたスタイルを適用
   const containerClasses = props.isMobile
     ? 'bg-ui-background p-6 rounded-lg w-full max-w-[400px] border-4 border-brand-primary shadow-xl relative mx-auto'
@@ -45,10 +53,45 @@ export const PreviewContent = (props: PreviewContentProps) => {
       <div className='bg-brand-light absolute -bottom-4 -right-4 h-20 w-20 rounded-full opacity-5' />
 
       <div className='relative z-10'>
+
+        {/* テーマラベル */}
+        {selectedTheme && (
+          <div className={`${props.isMobile ? 'pt-8 mb-6' : 'pt-6 mb-8'}`}>
+            <div 
+              style={{ 
+                display: 'inline-block',
+                border: `2px solid ${selectedTheme.color}`,
+                borderRadius: '9999px',
+                backgroundColor: '#ffffff',
+                padding: props.isMobile ? '4px 16px' : '6px 16px',
+                fontSize: props.isMobile ? '16px' : '18px',
+                fontWeight: '600',
+                color: selectedTheme.color,
+                verticalAlign: 'middle'
+              }}
+            >
+              <span style={{ 
+                fontSize: props.isMobile ? '20px' : '24px', 
+                marginRight: '4px', 
+                color: selectedTheme.color,
+                verticalAlign: 'middle'
+              }}>
+                #
+              </span>
+              <span style={{ 
+                color: selectedTheme.color,
+                verticalAlign: 'middle'
+              }}>
+                {selectedTheme.title}
+              </span>
+            </div>
+          </div>
+        )}
+        
         <h2
           className={`${
             props.isMobile ? 'text-lg' : 'text-xl'
-          } text-brand-primary mb-6 pt-16 font-bold drop-shadow-sm`}
+          } text-brand-primary ${selectedTheme ? 'mb-6' : 'mb-6 pt-16'} font-bold drop-shadow-sm`}
         >
           {props.title || '無題の体験日記'}
         </h2>
@@ -56,13 +99,7 @@ export const PreviewContent = (props: PreviewContentProps) => {
           {props.userName}
         </div>
 
-        {props.isScreenshot && (
-          <div className='absolute left-4 top-4'>
-            <span className='bg-brand-primary inline-block rounded-md px-2.5 py-1.5 text-[14px] text-white'>
-              {props.currentPage} / {props.totalPage}
-            </span>
-          </div>
-        )}
+
 
         <p
           className={`${
@@ -90,7 +127,6 @@ export const PreviewContent = (props: PreviewContentProps) => {
         )}
         <div className='border-ui-border text-brand-secondary mt-8 flex items-center justify-between border-t pt-4 text-sm'>
           <span>{props.date}</span>
-          <span>#セラピスト体験日記</span>
         </div>
       </div>
     </div>

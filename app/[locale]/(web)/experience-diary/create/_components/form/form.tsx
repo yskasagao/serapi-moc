@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { ArrowLeft, Camera, Eye, FileText, ImageIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useEffect, useRef, useTransition } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { PaginatedPreviewContent } from '../paginated-preview-content'
 import toast from 'react-hot-toast'
@@ -13,11 +14,14 @@ import { Toaster } from '@/app/_components/toaster'
 import { createDiary } from './action'
 import { useMediaQuery } from '@/lib/use-media-query'
 import { PreviewModal } from '../preview-modal'
+import { getActiveThemes } from '@/lib/mock-data/diary-themes'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 type diaryData = {
   title: string
   text: string
   images: string[]
+  themeId?: string
 }
 
 type Props = {
@@ -25,10 +29,12 @@ type Props = {
 }
 
 export const Form = (props: Props) => {
+  const searchParams = useSearchParams()
   const [diaryData, setDiaryData] = useState<diaryData>({
     title: '',
     text: '',
     images: [],
+    themeId: undefined,
   })
 
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
@@ -40,6 +46,21 @@ export const Form = (props: Props) => {
   const previewRef = useRef<HTMLDivElement>(null)
   const [isPending, startTransition] = useTransition()
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const [isThemeExpanded, setIsThemeExpanded] = useState(false)
+  const activeThemes = getActiveThemes()
+  const selectedTheme = diaryData.themeId ? activeThemes.find(t => t.id === diaryData.themeId) : null
+
+  // クエリパラメータからテーマIDを取得して初期設定
+  useEffect(() => {
+    const themeId = searchParams.get('themeId')
+    if (themeId && !diaryData.themeId && activeThemes.find(t => t.id === themeId)) {
+      setDiaryData(prev => ({
+        ...prev,
+        themeId: themeId
+      }))
+      setIsThemeExpanded(true) // テーマが設定されている場合は展開状態にする
+    }
+  }, [searchParams]) // activeThemesを依存配列から削除し、diaryData.themeIdの条件を追加
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -193,6 +214,89 @@ export const Form = (props: Props) => {
             />
           </div>
 
+          {/* テーマ選択セクション */}
+          <div className='mb-4'>
+            <label className='mb-1.5 block text-sm font-medium text-gray-700'>
+              テーマ（任意）
+            </label>
+            <div className='space-y-2'>
+              <button
+                type='button'
+                onClick={() => setIsThemeExpanded(!isThemeExpanded)}
+                className='flex w-full items-center justify-between rounded-md border border-gray-200 bg-white px-4 py-2 text-sm text-gray-700 hover:bg-gray-50'
+              >
+                <span>
+                  {selectedTheme ? (
+                    <span className='flex items-center'>
+                      <span 
+                        className="text-base mr-1 leading-none"
+                        style={{ color: selectedTheme.color }}
+                      >
+                        #
+                      </span>
+                      <span 
+                        className="leading-none text-sm font-semibold"
+                        style={{ color: selectedTheme.color }}
+                      >
+                        {selectedTheme.title}
+                      </span>
+                    </span>
+                  ) : (
+                    'テーマを選択してください'
+                  )}
+                </span>
+                {isThemeExpanded ? <ChevronUp className='h-4 w-4' /> : <ChevronDown className='h-4 w-4' />}
+              </button>
+              
+              {isThemeExpanded && (
+                <div className='max-h-60 overflow-y-auto rounded-md border border-gray-200 bg-white p-2'>
+                  <div className='mb-2'>
+                    <button
+                      type='button'
+                      onClick={() => {
+                        setDiaryData({ ...diaryData, themeId: undefined })
+                        setIsThemeExpanded(false)
+                      }}
+                      className='w-full rounded p-2 text-left text-sm text-gray-500 hover:bg-gray-50'
+                    >
+                      テーマなし
+                    </button>
+                  </div>
+                  <div className='space-y-1'>
+                    {activeThemes.map((theme) => (
+                      <button
+                        key={theme.id}
+                        type='button'
+                        onClick={() => {
+                          setDiaryData({ ...diaryData, themeId: theme.id })
+                          setIsThemeExpanded(false)
+                        }}
+                        className='grid grid-cols-[auto_1fr] w-full gap-3 rounded p-2 text-left hover:bg-gray-50'
+                      >
+                        <div className='flex items-center justify-center h-full'>
+                          <span 
+                            className="text-2xl leading-none"
+                            style={{ color: theme.color }}
+                          >
+                            #
+                          </span>
+                        </div>
+                        <div className='flex-1 min-w-0 flex items-center'>
+                          <div className='font-medium text-sm text-gray-900'>
+                            {theme.title}
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            {selectedTheme && (
+              <input type='hidden' name='themeId' value={selectedTheme.id} />
+            )}
+          </div>
+
           {/* 内容セクション */}
           <div className='mb-4'>
             <label htmlFor='content' className='mb-1.5 block text-sm font-medium text-gray-700'>
@@ -285,6 +389,7 @@ export const Form = (props: Props) => {
         title={diaryData.title}
         text={diaryData.text}
         images={diaryData.images}
+        themeId={diaryData.themeId}
         onClose={() => setIsPreviewOpen(false)}
         totalPages={totalPages}
         isMobile={isMobile}
@@ -303,6 +408,7 @@ export const Form = (props: Props) => {
                 title={diaryData.title}
                 text={diaryData.text}
                 images={diaryData.images}
+                themeId={diaryData.themeId}
                 date={formattedDate}
                 currentPage={currentPage}
                 totalPages={totalPages}

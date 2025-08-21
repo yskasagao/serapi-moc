@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
 import { SerapistPaginatorSchema, SerapistSchema } from '../schema'
 import z from 'zod'
-import type { Prisma } from '@prisma/client/media-db'
+import type { Prisma } from '@prisma/client'
 import { generateMockSerapistPaginator, useMockData } from '@/lib/mock-data'
 
 const FormData = z.object({

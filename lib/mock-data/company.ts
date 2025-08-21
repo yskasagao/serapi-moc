@@ -4,24 +4,16 @@ import type { Company } from '@/lib/server-only/company/schema'
 export const generateMockCompany = (index: number): Company => {
   const companyNames = [
     'リラクゼーションサロン東京', 'ヒーリングスパ大阪', 'ウェルネスセンター名古屋',
-    'マッサージスタジオ福岡', 'ビューティーサロン札幌', 'セラピールーム横浜',
-    'リフレッシュスパ神戸', 'リラックスルーム京都', 'ヘルスケアサロン仙台',
-    'アロマテラピー広島', 'エステティックサロン千葉', 'ボディケア沖縄'
+    'マッサージスタジオ福岡', 'ビューティーサロン札幌', 'セラピールーム横浜'
   ]
   
   const areas = [
     { area: '渋谷', areaGroup: '東京' },
     { area: '新宿', areaGroup: '東京' },
-    { area: '池袋', areaGroup: '東京' },
     { area: '梅田', areaGroup: '大阪' },
     { area: '難波', areaGroup: '大阪' },
     { area: '栄', areaGroup: '名古屋' },
-    { area: '天神', areaGroup: '福岡' },
-    { area: 'すすきの', areaGroup: '札幌' },
-    { area: 'みなとみらい', areaGroup: '横浜' },
-    { area: '三宮', areaGroup: '神戸' },
-    { area: '河原町', areaGroup: '京都' },
-    { area: '国分町', areaGroup: '仙台' }
+    { area: '天神', areaGroup: '福岡' }
   ]
   
   const baseUrl = 'https://example-salon'
@@ -38,7 +30,7 @@ export const generateMockCompany = (index: number): Company => {
 }
 
 // 複数の会社データを生成
-export const generateMockCompanies = (count: number = 20): Company[] => {
+export const generateMockCompanies = (count: number = 6): Company[] => {
   const companies: Company[] = []
   for (let i = 0; i < count; i++) {
     companies.push(generateMockCompany(i))
@@ -47,7 +39,7 @@ export const generateMockCompanies = (count: number = 20): Company[] => {
 }
 
 // エリアごとの会社データを生成
-export const generateMockCompaniesByArea = (areaGroup: string, count: number = 10): Company[] => {
+export const generateMockCompaniesByArea = (areaGroup: string, count: number = 4): Company[] => {
   const areaMap: Record<string, string[]> = {
     '東京': ['渋谷', '新宿', '池袋', '銀座', '原宿'],
     '大阪': ['梅田', '難波', '心斎橋', '天王寺', '京橋'],

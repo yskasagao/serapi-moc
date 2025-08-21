@@ -6,6 +6,7 @@ export const DiarySchema = z.object({
   text: z.string(),
   title: z.string(),
   createdAt: z.date(),
+  themeId: z.string().optional(), // テーマIDを追加
   User: z.object({
     name: z.string(),
   }),

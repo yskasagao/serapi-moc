@@ -6,20 +6,15 @@ const withNextIntl = createNextIntlPlugin()
 const nextConfig = {
   transpilePackages: ['@serapi/db'],
   output: 'standalone',
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            svgo: false,
-          },
-        },
-      ],
-    })
-    return config
+  
+  experimental: {
+    workerThreads: false,
+    webpackBuildWorker: false,
+    cpus: 1,
+    esmExternals: false,
+    serverComponentsExternalPackages: [],
   },
+  
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -45,10 +40,41 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '5mb',
-    },
+  
+  webpack: (config, { dev }) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgo: false,
+          },
+        },
+      ],
+    })
+    
+    if (dev) {
+      config.parallelism = 1
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+      }
+      
+      // Disable all optimization that might use workers
+      config.optimization = {
+        ...config.optimization,
+        minimize: false,
+        minimizer: [],
+        splitChunks: false,
+        runtimeChunk: false,
+      }
+      
+      // Force single-threaded operation
+      config.cache = false
+    }
+    
+    return config
   },
 }
 

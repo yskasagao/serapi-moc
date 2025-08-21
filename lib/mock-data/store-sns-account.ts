@@ -4,8 +4,7 @@ import type { StoreSNSAccount } from '@/app/api/store-sns-account/schema'
 export const generateMockStoreSNSAccount = (index: number): StoreSNSAccount => {
   const storeNames = [
     'リラクゼーション東京', 'ヒーリングスパ大阪', 'ウェルネス名古屋', 'マッサージ福岡',
-    'ビューティー札幌', 'セラピー横浜', 'リフレッシュ神戸', 'リラックス京都',
-    'ヘルスケア仙台', 'アロマ広島', 'エステ千葉', 'ボディケア沖縄'
+    'ビューティー札幌', 'セラピー横浜'
   ]
   
   // 7エリア区分ID（lib/constants.ts の areaGroupNameMap のキー）
@@ -30,8 +29,7 @@ export const generateMockStoreSNSAccount = (index: number): StoreSNSAccount => {
   // 店舗名をローマ字風に変換
   const romanizedNames = [
     'relaxation_tokyo', 'healing_spa_osaka', 'wellness_nagoya', 'massage_fukuoka',
-    'beauty_sapporo', 'therapy_yokohama', 'refresh_kobe', 'relax_kyoto',
-    'healthcare_sendai', 'aroma_hiroshima', 'este_chiba', 'bodycare_okinawa'
+    'beauty_sapporo', 'therapy_yokohama'
   ]
   const romanizedName = romanizedNames[index % romanizedNames.length]
   
@@ -63,7 +61,7 @@ export const generateMockStoreSNSAccount = (index: number): StoreSNSAccount => {
 }
 
 // 複数の店舗SNSアカウントデータを生成
-export const generateMockStoreSNSAccounts = (count: number = 12): StoreSNSAccount[] => {
+export const generateMockStoreSNSAccounts = (count: number = 6): StoreSNSAccount[] => {
   const accounts: StoreSNSAccount[] = []
   for (let i = 0; i < count; i++) {
     accounts.push(generateMockStoreSNSAccount(i))

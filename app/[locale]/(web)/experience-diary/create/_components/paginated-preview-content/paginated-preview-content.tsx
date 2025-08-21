@@ -7,6 +7,7 @@ type PaginatedPreviewContentProps = {
   title: string
   text: string
   images: string[]
+  themeId?: string
   date: string
   currentPage: number
   totalPages: number
@@ -18,6 +19,7 @@ export const PaginatedPreviewContent = ({
   title,
   text,
   images,
+  themeId,
   date,
   currentPage,
   totalPages,
@@ -69,6 +71,7 @@ export const PaginatedPreviewContent = ({
       title={title}
       text={paginatedContent}
       images={paginatedImages}
+      themeId={themeId}
       date={date}
       isMobile={isMobile}
       isScreenshot={true}

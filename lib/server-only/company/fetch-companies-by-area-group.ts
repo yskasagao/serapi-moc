@@ -1,5 +1,5 @@
 'use server'
-import { type Prisma } from '@prisma/client/company-db'
+import { type Prisma } from '@prisma/client'
 import z from 'zod'
 import prisma from '@/lib/company-prisma'
 import { CompanySchema, type Company } from '@/lib/server-only/company/schema'

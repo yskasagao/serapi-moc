@@ -12,6 +12,7 @@ type PreviewModalProps = {
   title: string
   text: string
   images: string[]
+  themeId?: string
   totalPages: number
   isMobile: boolean
   userName: string
@@ -25,6 +26,7 @@ export const PreviewModal = ({
   title,
   text,
   images,
+  themeId,
   totalPages,
   isMobile,
   userName,
@@ -52,6 +54,7 @@ export const PreviewModal = ({
             title={title}
             text={text}
             images={images}
+            themeId={themeId}
             date={formattedDate}
             isScreenshot={false}
             isMobile={isMobile}

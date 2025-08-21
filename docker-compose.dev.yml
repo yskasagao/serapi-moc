@@ -1,5 +1,24 @@
 version: "3.8"
 services:
+  web:
+    build: .
+    container_name: web-dev-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - ../../packages:/packages
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - DATABASE_URL=postgresql://webdev:webdev123@db:5432/webdev
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
   db:
     image: postgres:14.2
     container_name: web-dev-database

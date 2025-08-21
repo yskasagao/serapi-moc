@@ -53,19 +53,26 @@ npm run start:web      # Start web app in production mode
 ### Individual Application Commands
 
 ```bash
-# Web app (apps/web)
-cd apps/web && npm run dev     # Development server
-cd apps/web && npm run lint    # ESLint
-cd apps/web && npm run build   # Production build
+# Web app (apps/web) - Docker環境推奨（Jest Worker エラー解決済み）
+cd apps/web && yarn docker:dev   # Docker development environment (推奨)
+cd apps/web && yarn docker:up    # Start Docker containers
+cd apps/web && yarn docker:logs  # View container logs
+cd apps/web && yarn docker:shell # Connect to container shell
+cd apps/web && yarn docker:down  # Stop containers
+
+# Web app - ローカル環境（従来）
+cd apps/web && yarn dev           # Development server
+cd apps/web && yarn lint          # ESLint
+cd apps/web && yarn build         # Production build
 
 # Admin app (apps/admin)
-cd apps/admin && npm run dev      # Development server
-cd apps/admin && npm run lint     # ESLint
-cd apps/admin && npm run lint:fix # ESLint with auto-fix
+cd apps/admin && yarn dev         # Development server
+cd apps/admin && yarn lint        # ESLint
+cd apps/admin && yarn lint:fix    # ESLint with auto-fix
 
 # Company app (apps/company)
-cd apps/company && npm run dev   # Development server
-cd apps/company && npm run lint  # Next.js lint
+cd apps/company && yarn dev       # Development server
+cd apps/company && yarn lint      # Next.js lint
 ```
 
 ## Database Architecture
@@ -87,14 +94,19 @@ All database packages are located in `packages/` and are workspace dependencies 
 - **Forms**: React Hook Form with Zod validation
 - **Internationalization**: next-intl (web app)
 - **Containerization**: Docker with docker-compose
+- **Package Manager**: Yarn (npm から移行済み)
+- **Runtime**: Node.js 22.6.0 (Docker環境)
 
 ## Development Notes
 
+- **Package Manager**: Yarn を使用（npm から移行済み）
+- **Docker Environment**: Web app は Docker 環境推奨（Jest Worker エラー解決済み）
 - Use npm workspaces - run commands from root with `-w` flag or navigate to specific app directories
-- Database generation is automatically handled by build commands but can be run manually with `npm run db:generate`
+- Database generation is automatically handled by build commands but can be run manually with `yarn db:generate`
 - Each app runs on different ports to avoid conflicts
-- The admin app includes specific lint configuration and should use `npm run lint:fix` for auto-fixing
+- The admin app includes specific lint configuration and should use `yarn lint:fix` for auto-fixing
 - Docker setup includes nginx reverse proxy, PostgreSQL database, and TikTok proxy service
+- **Jest Worker Issue**: Docker環境で完全解決（Node.js 22.6.0 + Alpine Linux）
 
 ## Common Patterns
 

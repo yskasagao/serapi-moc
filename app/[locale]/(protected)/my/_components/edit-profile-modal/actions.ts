@@ -1,6 +1,6 @@
 'use server'
 
-import { type Prisma } from '@prisma/client/media-db'
+import { type Prisma } from '@prisma/client'
 import { nanoid } from 'nanoid'
 import { revalidatePath } from 'next/cache'
 import { getServerSession } from 'next-auth/next'

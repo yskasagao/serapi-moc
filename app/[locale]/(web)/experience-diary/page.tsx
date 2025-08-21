@@ -27,6 +27,9 @@ export default async function Page(props: Props) {
   if (params.sort) {
     searchParams.set('sort', params.sort as string)
   }
+  if (params.themeId) {
+    searchParams.set('themeId', params.themeId as string)
+  }
   const ret = await fetch(`${API_ORIGIN}/api/experience-diary/search?${searchParams.toString()}`, {
     method: 'GET',
     cache: 'no-cache',

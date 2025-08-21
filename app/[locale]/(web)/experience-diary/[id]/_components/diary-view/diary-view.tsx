@@ -11,6 +11,7 @@ import {
   decrementLike,
   incrementLike,
 } from '@/app/[locale]/(web)/experience-diary/[id]/_components/diary-view/action'
+import { getActiveThemes } from '@/lib/mock-data/diary-themes'
 type Props = {
   diary: Diary
 }
@@ -20,6 +21,12 @@ const storageKey = 'serapi:diary:liked-list'
 export const DiaryView = (props: Props) => {
   const [isLiked, setIsLiked] = useState(false)
   const [isPending, startTransition] = useTransition()
+
+  // テーマ情報を取得
+  const activeThemes = getActiveThemes()
+  const theme = props.diary.themeId 
+    ? activeThemes.find(t => t.id === props.diary.themeId)
+    : null
 
   const handleLike = () => {
     const storeData = localStorage.getItem(storageKey)
@@ -98,6 +105,34 @@ export const DiaryView = (props: Props) => {
               <span className='text-sm text-gray-500'>{props.diary.like}</span>
             </div>
           </div>
+
+          {/* テーマハッシュタグ情報 */}
+          {theme && (
+            <div className='mb-6 rounded-lg bg-gray-50 p-4'>
+              <div className='flex items-start space-x-3'>
+                <span 
+                  className='inline-flex items-center rounded-full border-2 bg-white px-3 py-1 text-sm font-semibold'
+                  style={{ 
+                    borderColor: theme.color,
+                    color: theme.color 
+                  }}
+                >
+                  <span 
+                    className="text-base mr-1 leading-none"
+                    style={{ color: theme.color }}
+                  >
+                    #
+                  </span>
+                  <span className="leading-none">
+                    {theme.title}
+                  </span>
+                </span>
+                <div>
+                  <p className='text-sm text-gray-700'>{theme.description}</p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* 著者情報 */}
           <div className='mb-6 rounded-r-md border-l-4 border-brand-ui-static bg-gray-50 py-2 pl-4 italic text-gray-600'>

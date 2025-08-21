@@ -3,23 +3,19 @@ import type { Serapist, SerapistPaginator } from '@/app/api/serapist/schema'
 // セラピストのモックデータ生成関数
 export const generateMockSerapist = (index: number): Serapist => {
   const names = [
-    'みか', 'あやか', 'ゆい', 'りな', 'ももか', 'さくら', 'あいり', 'なな',
-    'えみ', 'ひな', 'まい', 'ゆき', 'みお', 'れい', 'かな', 'すず',
-    'あん', 'みく', 'こはる', 'ちか', 'ゆめ', 'のあ', 'りお', 'しおり'
+    'みか', 'あやか', 'ゆい', 'りな', 'ももか', 'さくら'
   ]
   
-  const areas = ['東京', '大阪', '名古屋', '福岡', '札幌', '横浜', '神戸', '京都']
+  const areas = ['東京', '大阪', '名古屋', '福岡']
   
   const tiktokIds = [
     '@mika_therapy', '@ayaka_relax', '@yui_healing', '@rina_massage',
-    '@momoka_beauty', '@sakura_salon', '@airi_wellness', '@nana_spa',
-    null, null // 一部のセラピストはTikTokアカウントなし
+    '@momoka_beauty', '@sakura_salon'
   ]
   
   const twitterIds = [
     '@mika_th', '@ayaka_rl', '@yui_hl', '@rina_mg',
-    '@momoka_bt', '@sakura_sl', '@airi_wl', '@nana_sp',
-    null, null // 一部のセラピストはTwitterアカウントなし
+    '@momoka_bt', '@sakura_sl'
   ]
 
   const name = names[index % names.length]
@@ -46,7 +42,7 @@ export const generateMockSerapist = (index: number): Serapist => {
 export const generateMockSerapistPaginator = (
   page: number = 1, 
   limit: number = 12, 
-  totalCount: number = 100
+  totalCount: number = 18
 ): SerapistPaginator => {
   const startIndex = (page - 1) * limit
   const endIndex = Math.min(startIndex + limit, totalCount)

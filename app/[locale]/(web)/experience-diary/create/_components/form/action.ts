@@ -6,12 +6,13 @@ import { nanoid } from 'nanoid'
 import sharp from 'sharp'
 import { getAuthOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
-import { type Prisma } from '@prisma/client/media-db'
+import { type Prisma } from '@prisma/client'
 import { storeImage } from '@/lib/server-only/store-image'
 const formSchema = z.object({
   title: z.string().min(1),
   text: z.string().min(1),
   images: z.array(z.instanceof(File)),
+  themeId: z.string().optional(),
 })
 export const createDiary = async (formData: FormData): Promise<Result> => {
   const session = await getServerSession(getAuthOptions())
@@ -22,6 +23,7 @@ export const createDiary = async (formData: FormData): Promise<Result> => {
     title: formData.get('title'),
     text: formData.get('text'),
     images: formData.getAll('images'),
+    themeId: formData.get('themeId') || undefined,
   })
   if (!parsed.success) {
     return {
@@ -56,6 +58,7 @@ export const createDiary = async (formData: FormData): Promise<Result> => {
   const data: Prisma.ExperienceDiaryCreateInput = {
     title: parsed.data.title,
     text: parsed.data.text,
+    themeId: parsed.data.themeId || null,
     User: {
       connect: {
         id: session.user.id,
