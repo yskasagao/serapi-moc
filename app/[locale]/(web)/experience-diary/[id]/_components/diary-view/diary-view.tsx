@@ -108,29 +108,24 @@ export const DiaryView = (props: Props) => {
 
           {/* テーマハッシュタグ情報 */}
           {theme && (
-            <div className='mb-6 rounded-lg bg-gray-50 p-4'>
-              <div className='flex items-start space-x-3'>
+            <div className='mb-6'>
+              <span 
+                className='inline-flex items-center rounded-full border-2 bg-white px-4 py-2 text-base font-semibold'
+                style={{ 
+                  borderColor: theme.color,
+                  color: theme.color 
+                }}
+              >
                 <span 
-                  className='inline-flex items-center rounded-full border-2 bg-white px-3 py-1 text-sm font-semibold'
-                  style={{ 
-                    borderColor: theme.color,
-                    color: theme.color 
-                  }}
+                  className="text-lg mr-1 leading-none"
+                  style={{ color: theme.color }}
                 >
-                  <span 
-                    className="text-base mr-1 leading-none"
-                    style={{ color: theme.color }}
-                  >
-                    #
-                  </span>
-                  <span className="leading-none">
-                    {theme.title}
-                  </span>
+                  #
                 </span>
-                <div>
-                  <p className='text-sm text-gray-700'>{theme.description}</p>
-                </div>
-              </div>
+                <span className="leading-none">
+                  {theme.title}
+                </span>
+              </span>
             </div>
           )}
 
