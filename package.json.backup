@@ -17,11 +17,11 @@
     "db:seed": "cd ../../packages/media-db && npm run seed",
     "db:reset-with-seed": "yarn db:reset && yarn db:generate && yarn db:migrate && yarn db:seed",
     "setup:manual": "echo セットアップ手順: 1.yarn db:start 2.yarn db:generate 3.yarn db:migrate 4.yarn dev",
-    "dev:kill": "docker-compose -f docker-compose.dev.yml stop web && wmic process where \"commandline like '%next%start-server%'\" delete 2>nul || echo Stopped Docker container and Node processes",
-    "dev:clean": "yarn dev:kill && timeout /t 3 >nul && docker-compose -f docker-compose.dev.yml rm -f web",
-    "dev:safe": "yarn dev:clean && yarn db:start",
+    "dev:kill": "wmic process where \"commandline like '%next%start-server%'\" delete 2>nul || echo No Next.js processes found",
+    "dev:clean": "yarn dev:kill && timeout /t 3 >nul",
+    "dev:safe": "yarn dev:clean && yarn dev",
     "port:check": "netstat -ano | findstr :3000 || echo Port 3000 is free",
-    "port:kill": "docker-compose -f docker-compose.dev.yml stop web || echo Docker container stopped",
+    "port:kill": "for /f \"tokens=5\" %a in ('netstat -ano ^| findstr :3000') do wmic process where processid=%a delete 2>nul",
     "env:status": "echo === Environment Status === && yarn port:check && docker ps --filter name=web-dev-database --format \"table {{.Names}}\t{{.Status}}\"",
     "dev:utils": "scripts\\dev-utils.bat",
     "docker:build": "docker-compose -f docker-compose.dev.yml build",
@@ -32,8 +32,7 @@
     "docker:logs": "docker-compose -f docker-compose.dev.yml logs -f web",
     "docker:shell": "docker-compose -f docker-compose.dev.yml exec web sh",
     "docker:clean": "docker-compose -f docker-compose.dev.yml down -v && docker system prune -f",
-    "docker:dev": "docker-compose -f docker-compose.dev.yml up --build",
-    "dev:reset": "docker-compose -f docker-compose.dev.yml down && docker-compose -f docker-compose.dev.yml up -d"
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up --build"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.525.0",

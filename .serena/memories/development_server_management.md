@@ -22,18 +22,24 @@
 - 残存プロセスがないことを確認
 - クリーンな状態で終了
 
-## 🛠️ 使用すべきコマンド
+## 🛠️ 使用すべきコマンド（Docker環境対応版）
 
 ### プロセス管理
 ```bash
-# 安全な起動（プロセス終了 + 起動）
+# 安全な起動（Docker container停止 + 起動）
 yarn dev:safe
 
-# プロセス強制終了
+# Docker container + プロセス強制終了
 yarn dev:kill
 
 # ポート確認
 yarn port:check
+
+# Docker container停止のみ
+yarn port:kill
+
+# 完全リセット
+yarn dev:reset
 
 # 対話式管理
 yarn dev:utils
@@ -41,15 +47,23 @@ yarn dev:utils
 
 ### 確認コマンド
 ```bash
+# Docker container状況確認
+docker-compose -f docker-compose.dev.yml ps
+
 # ポート使用状況確認
 netstat -ano | findstr :3000
 
 # プロセス確認
 tasklist | findstr node.exe
 
-# プロセス強制終了（緊急時）
-wmic process where ProcessId=[PID] delete
+# Docker container停止（緊急時）
+docker-compose -f docker-compose.dev.yml stop web
 ```
+
+### Docker環境での重要事項
+- 開発サーバーはDocker container内で動作
+- 単純なNode.jsプロセス終了では解決しない
+- Docker containerの適切な停止・再起動が必要
 
 ## 🎯 責任の明確化
 

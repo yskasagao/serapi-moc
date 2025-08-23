@@ -19,11 +19,12 @@ if "%choice%"=="5" goto full_reset
 goto end
 
 :restart_dev
-echo Next.js開発サーバーを強制停止中...
+echo Docker開発サーバーを強制停止中...
+docker-compose -f docker-compose.dev.yml stop web >nul 2>&1
 wmic process where "commandline like '%%next%%start-server%%'" delete >nul 2>&1
-timeout /t 2 >nul
+timeout /t 3 >nul
 echo 開発サーバーを再起動中...
-start cmd /k "yarn dev"
+docker-compose -f docker-compose.dev.yml up -d
 goto end
 
 :check_port
@@ -32,13 +33,16 @@ netstat -ano | findstr :3000
 goto end
 
 :kill_processes
-echo Node.jsプロセスを確認中...
+echo Dockerコンテナとプロセスを確認中...
+docker-compose -f docker-compose.dev.yml ps
+echo.
 wmic process where "name='node.exe' and commandline like '%%next%%'" get processid,commandline
-echo 上記のプロセスを終了しますか？ (Y/N)
+echo 上記のコンテナ/プロセスを終了しますか？ (Y/N)
 set /p confirm=
 if /i "%confirm%"=="Y" (
-    wmic process where "name='node.exe' and commandline like '%%next%%'" delete
-    echo プロセスを終了しました
+    docker-compose -f docker-compose.dev.yml stop web
+    wmic process where "name='node.exe' and commandline like '%%next%%'" delete >nul 2>&1
+    echo Docker containerとプロセスを終了しました
 )
 goto end
 
@@ -50,12 +54,11 @@ goto end
 
 :full_reset
 echo 完全リセット実行中...
+docker-compose -f docker-compose.dev.yml down
 wmic process where "commandline like '%%next%%start-server%%'" delete >nul 2>&1
-yarn db:stop
 timeout /t 2 >nul
-yarn db:start
-yarn db:generate
-yarn dev
+docker-compose -f docker-compose.dev.yml up -d
+echo 完全リセット完了
 goto end
 
 :end

@@ -71,7 +71,14 @@
       "Bash(yarn db:start:*)",
       "Bash(git show:*)",
       "Bash(git blame:*)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(yarn port:check:*)",
+      "Bash(grep:*)",
+      "Bash(cp:*)",
+      "Bash(sed:*)",
+      "Bash(yarn port:kill:*)",
+      "Bash(yarn db:stop:*)",
+      "Bash(yarn env:status:*)"
     ],
     "deny": [],
     "additionalDirectories": [
