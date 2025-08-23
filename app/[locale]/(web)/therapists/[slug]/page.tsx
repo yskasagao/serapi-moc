@@ -22,7 +22,7 @@ const fetchSerapistar = cache(async (slug: string): Promise<SerapistarDetail> =>
   }
 
   // 本番環境: データベースからデータを取得
-  return prisma.serapistar.findFirstOrThrow({
+  return prisma.serapistar.findFirst({
     select: {
       id: true,
       slug: true,

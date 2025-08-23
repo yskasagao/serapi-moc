@@ -84,7 +84,7 @@ export default async function Page(props: Props) {
     })
     
     // 作成後に再取得
-    user = await prisma.user.findFirstOrThrow({
+    user = await prisma.user.findFirst({
       select: {
         name: true,
         image: true,

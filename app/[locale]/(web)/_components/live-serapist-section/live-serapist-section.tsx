@@ -33,9 +33,9 @@ export const LiveSerapistSection = (props: Props) => {
       <LiveSectionTitle>{pageTranslation('title')}</LiveSectionTitle>
       <div className='grid grid-cols-2 justify-items-center gap-4 sm:grid-cols-3 md:grid-cols-4'>
         {/* ライブ配信中セラピストカード */}
-        {liveSerapists.map((serapist) => {
+        {liveSerapists.map((serapist, index) => {
           return (
-            <Link href={`/therapists/${serapist.slug}`} key={`serapist-${serapist.slug}`}>
+            <Link href={`/therapists/${serapist.slug}`} key={`live-serapist-${index}`}>
               <SerapistCard serapist={serapist} />
             </Link>
           )

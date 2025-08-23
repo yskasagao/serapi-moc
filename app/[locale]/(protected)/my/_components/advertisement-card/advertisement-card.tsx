@@ -22,17 +22,15 @@ export const AdvertisementCard = async (props: Props) => {
       }
     })
   }
+
   return (
-    <Card className='border-custom relative h-[280px]'>
-      <div className='absolute left-2 top-2 z-10 rounded-md bg-[#4a4a4a] px-2 py-1 text-xs text-white'>
-        お得な情報
-      </div>
+    <Card className='relative w-full max-w-sm shadow-md transition-shadow hover:shadow-lg'>
       <Button
+        onClick={handleClick}
+        disabled={isPending}
         variant='ghost'
         size='sm'
-        className='absolute right-1 top-1 z-10 h-8 w-8 rounded-full bg-white p-0'
-        disabled={isPending}
-        onClick={handleClick}
+        className='absolute right-2 top-2 z-10 h-6 w-6 rounded-full p-0 hover:bg-gray-100'
       >
         <X className='h-4 w-4 text-[#ff7e8a]' />
       </Button>

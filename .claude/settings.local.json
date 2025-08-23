@@ -63,7 +63,8 @@
       "mcp__serena-web__find_symbol",
       "Bash(yarn dev:*)",
       "Bash(node:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "mcp__serena-web__delete_memory"
     ],
     "deny": [],
     "additionalDirectories": [

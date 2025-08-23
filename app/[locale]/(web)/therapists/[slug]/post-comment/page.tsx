@@ -23,7 +23,7 @@ const Page = async (props: Props) => {
       nickname: '開発用セラピスト',
     }
   } else {
-    serapistar = await prisma.serapistar.findFirstOrThrow({
+    serapistar = await prisma.serapistar.findFirst({
       select: {
         nickname: true,
       },

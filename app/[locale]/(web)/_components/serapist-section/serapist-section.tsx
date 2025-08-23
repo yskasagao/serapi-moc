@@ -23,10 +23,10 @@ export const SerapistSection = (props: Props) => {
           <p className='text-center'>セラピストデータがありません。</p>
         )}
         <div className='grid grid-cols-2 justify-items-center gap-4 sm:grid-cols-3 md:grid-cols-4'>
-          {nonLiveSerapists.map((v) => {
+          {nonLiveSerapists.map((v, index) => {
             return (
-              <Link href={`/therapists/${v.slug}`} key={v.slug}>
-                <SerapistCard key={v.slug} serapist={v} />
+              <Link href={`/therapists/${v.slug}`} key={`serapist-${index}`}>
+                <SerapistCard serapist={v} />
               </Link>
             )
           })}

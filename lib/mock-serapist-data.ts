@@ -103,8 +103,6 @@ export const MOCK_SERAPIST_LIST: Record<string, SerapistarDetail> = {
       like: 5,
     },
   },
-
-  },
 }
 
 /**
